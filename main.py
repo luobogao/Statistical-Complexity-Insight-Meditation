@@ -256,7 +256,7 @@ def probs_to_complexity(probs):
 
 def binarise(data,mode="median"):
     """
-    Binarise an array of continuous numbers into an array of 0's and 1's (as a numpy array of integers)
+    Binarise an array of continuous numbers into an array of 0's and 1's (as a string)
     """
     if(type(data)==list or type(data)==tuple):
         data=np.array(data,dtype=float)
@@ -270,22 +270,28 @@ def binarise(data,mode="median"):
     for i in range(len(data)):
         if(data[i]>=threshold):
             output[i]+=1
-    return output
+    # Convert to string
+    outstr = ""
+    for element in output:
+        outstr += str(element)
+    return outstr
 
 def multi_binarise(matrix,mode="median"):
     """
     Binarise a 2D matrix (used for calculating multiple statistical complexities)    
     """
     print("Binarising data...")
+    # Convert to numpy matrix
     if(type(matrix)==list or type(matrix)==tuple):
         matrix=np.array(matrix,dtype=object)
     output = []
     percent_check = 0.
     for i in range(len(matrix)):
         output.append(binarise(matrix[i],mode))
+        # Output progress
         if((i+1)/float(len(matrix))>=percent_check/100.):
             print("{}% of data binarised".format(\
                 round(((i+1)/len(matrix))*100,1)))
             percent_check+=10.
     print("Data Binarised")
-    return np.array(output)
+    return np.array(output, dtype = object)
