@@ -1,9 +1,11 @@
 # Statistical Complexity of Insight Meditation
 
 ## Overview
-This project uses the complexity code published by Starkey et al. applied to EEG recordings provided by the meditation expert Daniel Ingram.
+This project uses the complexity code published by Starkey et al. applied to EEG recordings provided by the meditation expert Daniel Ingram, author of ["Mastering the Core Teachings of the Buddha"](https://www.mctb.org/) and now with the [EPRC](https://theeprc.org/) working to add spiritual measurements to the DSM. The purpose of this new complexity measurement is "constructing an equation that can measure and describe the richness of conscious experience in any physical system, whether human, animal, or machine" [Study link](https://www.vox.com/future-perfect/2023/12/15/24001424/consciousness-complexity-neuroscience-mental-health). The authors explain that this new measurement does not succeed in this grand ambition, but it is a bit closer. Looking at the results of this measurement when applied to Daniel's meditation data, it does look they are on the right track. Complexity increases dramatically in the same way during each of his recorded meditation sessions, while control data doesn't show any similar increase. We hope this data helps guide the development of this helpful measurement.
+
 
 - [Study link](https://www.biorxiv.org/content/10.1101/2023.12.05.570101v1)
+- [Vox article](https://www.vox.com/future-perfect/2023/12/15/24001424/consciousness-complexity-neuroscience-mental-health)
 - [Study code](https://github.com/CDR-Clueless/Statistical-Complexity)
 - [Daniel's EEG data](https://osf.io/srfnz/?view_only=1a408d6b96a6402bbf1464418ec3219e)
 
