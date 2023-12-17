@@ -12,14 +12,14 @@ This project uses the complexity code published by Starkey et al. applied to EEG
 
 Every meditation session Daniel record shows similar complexity behavior: a stead rise at the same rate every session, levelling out at the the same range. Compared with a control session the differences are clear. In the control, Daniel recorded with closed eyes and calm focus but not attempt at insight for the for the first 20 minutes:
 
-![All meditation sessions with control](images/Meditation_and_Control.jpeg)
+![All meditation sessions with control](images/Meditation_vs_Control.png)
 
 ## Code
 
 Complexity is calculated from the raw EEG voltages extracted from .EEG files provided by Daniel here (link at top of this page). Voltage files are large (>200mb), so only one file is provided in this repository as an example, found in the 'Example' folder. Complexity can be calculated from the python file in this same folder:
 
 ```bash
-python3 calculate_complexity.py 'August 20 Meditation - Voltages.csv' 
+python3 calculate_complexity.py 'August 20 - Raw Voltages.csv' 
 
 ```
 
