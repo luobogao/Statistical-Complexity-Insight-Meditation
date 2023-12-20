@@ -1,7 +1,9 @@
 # Statistical Complexity of Insight Meditation
 
 ## Overview
-This project uses the complexity code published by Starkey et al. applied to EEG recordings provided by the meditation expert Daniel Ingram, author of ["Mastering the Core Teachings of the Buddha"](https://www.mctb.org/) and now with the [EPRC](https://theeprc.org/) working to add spiritual measurements to the DSM. The purpose of this new complexity measurement is "constructing an equation that can measure and describe the richness of conscious experience in any physical system, whether human, animal, or machine" [Study link](https://www.vox.com/future-perfect/2023/12/15/24001424/consciousness-complexity-neuroscience-mental-health). The authors explain that this new measurement does not succeed in this grand ambition, but it is a bit closer. Looking at the results of this measurement when applied to Daniel's meditation data, it does look they are on the right track. Complexity increases dramatically in the same way during each of his recorded meditation sessions, while control data doesn't show any similar increase. We hope this data helps guide the development of this helpful measurement.
+This project uses the complexity code published by Starkey et al. [(link)](https://www.vox.com/future-perfect/2023/12/15/24001424/consciousness-complexity-neuroscience-mental-health) applied to EEG recordings provided by the meditation expert Daniel Ingram, author of ["Mastering the Core Teachings of the Buddha"](https://www.mctb.org/) and now with the [EPRC](https://theeprc.org/) working to add spiritual measurements to the DSM.
+
+This new complexity measurement is a proposed improvement over the standard "Lempel Ziv" measurement frequently used in many fields including EEG analysis. Lempel-Ziv (LZ) already does a great job distinguishing different states of consciousness, sleep states, and meditation states. This "Statistical Complexity" (SC) measurement has similar results, but with improved ability to distinguish some states.
 
 
 - [Study link](https://www.biorxiv.org/content/10.1101/2023.12.05.570101v1)
@@ -20,6 +22,10 @@ This Statistical Complexity scoring is a big improvement over the typical Lempel
 
 ![Lempel-Ziv vs Statistical Complexity](images/lz_vs_sc.png)
 
+
+## Discussion
+
+The SC researchers intend to build "an equation that can measure and describe the richness of conscious experience in any physical system, whether human, animal, or machine". This new measurement does not succeed in this grand ambition, but appears to be on the right track. The ability to reliably distinguish Daniel's basic meditation states is critical to our work helping beginners to distinguish their own meditation progress.
 
 
 ## Code
