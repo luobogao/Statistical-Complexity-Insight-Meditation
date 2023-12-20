@@ -22,6 +22,11 @@ This Statistical Complexity scoring is a big improvement over the typical Lempel
 
 ![Lempel-Ziv vs Statistical Complexity](images/lz_vs_sc.png)
 
+SC requires a careful choice of Lambda and Sigma values to get the most out of the improved method. Study authors suggest a Lambda value of 5, demonstrating that higher values were better able to distinguish different states of consciousness than lower values, and better able to distinguish these values from LZ complexity. Running this code over the August 20 meditation session with a range of Lambda values from 2 to 7 (chart below) shows that low values show relatively little change in complexity over the meditation (Lambda = 2 actually shows a flat line), while progressively higher values magnifiy the differences considerably. Even higher values increased this magnification, but apparently without much improvement in classification (the shape of the data looked the same, just with higher peaks). The Sigma value range didn't seem to matter very much for this data, so all calculation now just use 0.01.
+
+![Lempel-Ziv vs Statistical Complexity](images/lambda_range.png)
+
+
 
 ## Discussion
 
