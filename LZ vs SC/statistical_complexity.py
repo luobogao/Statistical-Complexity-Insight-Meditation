@@ -1,25 +1,3 @@
-## Based on https://github.com/CDR-Clueless/Statistical-Complexity
-
-
-import numpy as np
-import pandas as pd
-import os
-import glob
-import matplotlib.pyplot as plt
-from copy import deepcopy
-import sys
-import csv
-
-OUTPUT_FOLDER = "Complexity"
-
-# Global variables
-COLUMNS_TO_PROCESS = ['F7', 'Fp1', 'Fp2', 'F8', 'F3', 'Fz', 'F4', 'C3', 'Cz', 'P8', 'P7', 'Pz', 'P4', 'T3', 'P3', 'O1', 'O2', 'C4', 'T4']
-DL = 7  # Desired lambda
-SIGMA = 0.01  # Sigma value for state collapsing
-WINDOW_SIZE = 10  # Window size in seconds
-STEP_SIZE = 1  # Step size in seconds
-SAMPLE_RATE = 500  # Sample rate in Hz
-
 import numpy as np
 from copy import deepcopy
 
@@ -276,8 +254,6 @@ def probs_to_complexity(probs):
         complexity -= probs[i]*logprobs[i]
     return complexity
 
-
-
 def binarise(data,mode="median"):
     """
     Binarise an array of continuous numbers into an array of 0's and 1's (as a string)
@@ -319,84 +295,3 @@ def multi_binarise(matrix,mode="median"):
             percent_check+=10.
     print("Data Binarised")
     return np.array(output, dtype = object)
-    
-
-
-
-def sliding_window_process(data, window_size, overlap, sample_rate):
-    """
-    Apply a sliding window on the data.
-    """
-    windowed_data = []
-    step_size = window_size - overlap
-    num_samples = window_size * sample_rate
-
-    for start in range(0, len(data) - num_samples + 1, step_size * sample_rate):
-        windowed_data.append(data[start:start + num_samples])
-
-    return windowed_data
-
-
-def read_csv_columns(file_path, column_names):
-    """
-    Read specified columns from a CSV file.
-    """
-    try:
-        data = pd.read_csv(file_path, usecols=column_names)
-        return data
-    except Exception as e:
-        print(f"Error reading CSV file: {e}")
-        sys.exit(1)
-
-
-
-
-def calculate_and_graph_complexities(dataframe, output_file):
-    """
-    Calculate complexities for each column, graph the results, and save to a CSV.
-    """
-    plt.figure()
-    complexities_dict = {}
-
-    for column in COLUMNS_TO_PROCESS:
-        data = dataframe[column].values
-        windowed_data = sliding_window_process(data, WINDOW_SIZE, STEP_SIZE, SAMPLE_RATE)
-        complexities = []
-
-        for window in windowed_data:
-            binary_string = binarise(window)
-            complexity = calculate(binary_string, DL, SIGMA)
-            complexities.append(complexity)
-
-        complexities_dict[column] = complexities
-        plt.plot(complexities, label=column)
-
-    plt.xlabel('Window')
-    plt.ylabel('Complexity')
-    plt.title('Complexity')
-    plt.legend()
-    #plt.show() ## Uncomment to show the plot of each EEG file
-
-    complexities_df = pd.DataFrame(complexities_dict)
-    complexities_df.to_csv(output_file, index=False)
-
-
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python program.py <path_to_folder>")
-        sys.exit(1)
-
-    folder_path = sys.argv[1]
-    # Ensure the output folder exists
-    if not os.path.exists(OUTPUT_FOLDER):
-        os.makedirs(OUTPUT_FOLDER)
-    
-    # Process all CSV files in the folder
-    for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
-        output_file = os.path.join(OUTPUT_FOLDER, os.path.basename(csv_file).replace('.csv', '_complexity.csv'))
-        dataframe = read_csv_columns(csv_file, COLUMNS_TO_PROCESS)
-        calculate_and_graph_complexities(dataframe, output_file)
-    
-
-if __name__ == "__main__":
-    main()

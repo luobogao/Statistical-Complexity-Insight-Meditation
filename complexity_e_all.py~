@@ -4,13 +4,10 @@
 import numpy as np
 import pandas as pd
 import os
-import glob
 import matplotlib.pyplot as plt
 from copy import deepcopy
 import sys
 import csv
-
-OUTPUT_FOLDER = "Complexity"
 
 # Global variables
 COLUMNS_TO_PROCESS = ['F7', 'Fp1', 'Fp2', 'F8', 'F3', 'Fz', 'F4', 'C3', 'Cz', 'P8', 'P7', 'Pz', 'P4', 'T3', 'P3', 'O1', 'O2', 'C4', 'T4']
@@ -375,11 +372,23 @@ def calculate_and_graph_complexities(dataframe, output_file):
     plt.ylabel('Complexity')
     plt.title('Complexity')
     plt.legend()
-    #plt.show() ## Uncomment to show the plot of each EEG file
+    plt.show()
 
     complexities_df = pd.DataFrame(complexities_dict)
     complexities_df.to_csv(output_file, index=False)
 
+def process_subfolders(folder_path):
+    """
+    Process 'raw_voltages.csv' files in each subfolder.
+    """
+    for root, dirs, files in os.walk(folder_path):
+        for dir in dirs:
+            subfolder_path = os.path.join(root, dir)
+            raw_voltages_file = os.path.join(subfolder_path, 'raw_voltages.csv')
+            if os.path.isfile(raw_voltages_file):
+                output_file = os.path.join(subfolder_path, f"{dir}_complexity.csv")
+                dataframe = read_csv_columns(raw_voltages_file, COLUMNS_TO_PROCESS) 
+                calculate_and_graph_complexities(dataframe, output_file)
 
 def main():
     if len(sys.argv) != 2:
@@ -387,16 +396,7 @@ def main():
         sys.exit(1)
 
     folder_path = sys.argv[1]
-    # Ensure the output folder exists
-    if not os.path.exists(OUTPUT_FOLDER):
-        os.makedirs(OUTPUT_FOLDER)
-    
-    # Process all CSV files in the folder
-    for csv_file in glob.glob(os.path.join(folder_path, '*.csv')):
-        output_file = os.path.join(OUTPUT_FOLDER, os.path.basename(csv_file).replace('.csv', '_complexity.csv'))
-        dataframe = read_csv_columns(csv_file, COLUMNS_TO_PROCESS)
-        calculate_and_graph_complexities(dataframe, output_file)
-    
+    process_subfolders(folder_path)
 
 if __name__ == "__main__":
     main()

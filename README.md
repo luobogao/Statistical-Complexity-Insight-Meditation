@@ -16,6 +16,12 @@ Every meditation session Daniel record shows similar complexity behavior: a stea
 
 ![All meditation sessions with control](images/Meditation_vs_Control.png)
 
+This Statistical Complexity scoring is a big improvement over the typical Lempel-Ziv complexity measurement for this meditation data. LZ (red line below) does not show any significant changes over the course of meditation compared with the first few minutes, but SC (blue line) shows behavior consistent with Daniel's reported phenomenology and consistent with what we might expect from meditation: starting off with low complexity, gradually increasing to a new stable state of high complexity:
+
+![Lempel-Ziv vs Statistical Complexity](images/lz_vs_sc.png)
+
+
+
 ## Code
 
 Complexity is calculated from the raw EEG voltages extracted from .EEG files provided by Daniel here (link at top of this page). Voltage files are large (>200mb), so only one file is provided in this repository as an example, found in the 'Example' folder. Complexity can be calculated from the python file in this same folder:
